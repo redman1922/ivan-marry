@@ -2,3 +2,5 @@ node_modules/
 dist/
 .idea/
 .tmp_docx/
+.env
+.env.local

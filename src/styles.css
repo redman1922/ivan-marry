@@ -154,7 +154,7 @@ input {
 .seal {
   position: absolute;
   left: 50%;
-  top: min(62vh, 62%);
+  top: min(68vh, 68%);
   display: grid;
   place-items: center;
   width: clamp(84px, 10vw, 126px);
@@ -174,11 +174,15 @@ input {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: clamp(28px, 7vh, 76px);
-  width: min(470px, calc(100vw - 36px));
+  top: clamp(270px, 39vh, 370px);
+  width: min(560px, calc(100vw - 36px));
   margin: 0 auto;
   text-align: center;
-  line-height: 1.45;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(27px, 2.25vw, 38px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.12;
   text-shadow: 0 2px 18px rgba(0,0,0,.44);
   overflow-wrap: break-word;
 }
@@ -390,6 +394,13 @@ p {
   background: var(--burgundy-dark);
   transform: translateY(-1px);
   box-shadow: 0 14px 30px rgba(72, 16, 26, .18);
+}
+
+.button:disabled {
+  opacity: .62;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
 }
 
 .muted {
@@ -718,6 +729,16 @@ input[type="checkbox"] {
   border-radius: 8px;
   color: var(--cream-soft);
   background: var(--olive);
+}
+
+.error {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid rgba(111, 23, 37, .28);
+  border-radius: 8px;
+  color: var(--burgundy);
+  background: rgba(255, 250, 240, .7);
+  font-size: 15px;
 }
 
 .countdown__grid {

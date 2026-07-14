@@ -7,10 +7,15 @@ const now = ref(new Date());
 const activeLocationSlide = ref(0);
 const songSuggestion = ref('');
 const songSubmitted = ref(false);
+const rsvpSubmitting = ref(false);
+const rsvpError = ref('');
+const songSubmitting = ref(false);
+const songError = ref('');
 let timerId;
 let sliderTimerId;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
+const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 
 const rsvp = ref({
   attendance: '',
@@ -115,16 +120,66 @@ watch(
   { immediate: true },
 );
 
-function submitRsvp() {
-  submitted.value = true;
+async function sendToGoogleSheets(type, payload) {
+  if (!googleSheetsEndpoint) {
+    throw new Error('Не указан VITE_GOOGLE_SCRIPT_URL в .env');
+  }
+
+  await fetch(googleSheetsEndpoint, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8',
+    },
+    body: JSON.stringify({
+      type,
+      payload,
+      sentAt: new Date().toISOString(),
+    }),
+  });
+}
+
+async function submitRsvp() {
+  submitted.value = false;
+  rsvpError.value = '';
+  rsvpSubmitting.value = true;
+
+  try {
+    await sendToGoogleSheets('rsvp', {
+      attendance: rsvp.value.attendance,
+      name: rsvp.value.name,
+      guests: rsvp.value.guests,
+      meal: rsvp.value.meal,
+      drinks: [...rsvp.value.drinks],
+      telegram: rsvp.value.telegram,
+    });
+    submitted.value = true;
+  } catch (error) {
+    rsvpError.value = error instanceof Error ? error.message : 'Не удалось отправить ответ';
+  } finally {
+    rsvpSubmitting.value = false;
+  }
 }
 
 function setLocationSlide(index) {
   activeLocationSlide.value = index;
 }
 
-function submitSong() {
-  songSubmitted.value = true;
+async function submitSong() {
+  songSubmitted.value = false;
+  songError.value = '';
+  songSubmitting.value = true;
+
+  try {
+    await sendToGoogleSheets('song', {
+      song: songSuggestion.value,
+    });
+    songSubmitted.value = true;
+  } catch (error) {
+    songError.value = error instanceof Error ? error.message : 'Не удалось отправить песню';
+  } finally {
+    songSubmitting.value = false;
+  }
 }
 </script>
 
@@ -304,8 +359,11 @@ function submitSong() {
             Предложите песню для вечеринки
             <input v-model="songSuggestion" type="text" placeholder="Название песни или исполнитель" />
           </label>
-          <button class="button" type="submit">Добавить</button>
+          <button class="button" type="submit" :disabled="songSubmitting">
+            {{ songSubmitting ? 'Отправляем...' : 'Добавить' }}
+          </button>
           <p v-if="songSubmitted" class="success">Записали идею: {{ songSuggestion || 'песня-сюрприз' }}.</p>
+          <p v-if="songError" class="error">{{ songError }}</p>
         </form>
       </div>
     </section>
@@ -354,8 +412,11 @@ function submitSong() {
           <label><input v-model="rsvp.drinks" type="checkbox" value="Безалкогольные напитки" /> Безалкогольные напитки</label>
         </fieldset>
 
-        <button class="button" type="submit">Отправить</button>
-        <p v-if="submitted" class="success">Спасибо! Ответ сохранен на странице. Подключение отправки сделаем следующим шагом.</p>
+        <button class="button" type="submit" :disabled="rsvpSubmitting">
+          {{ rsvpSubmitting ? 'Отправляем...' : 'Отправить' }}
+        </button>
+        <p v-if="submitted" class="success">Спасибо! Ответ отправлен.</p>
+        <p v-if="rsvpError" class="error">{{ rsvpError }}</p>
       </form>
     </section>
 
