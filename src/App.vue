@@ -4,7 +4,11 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 const isOpened = ref(false);
 const submitted = ref(false);
 const now = ref(new Date());
+const activeLocationSlide = ref(0);
+const songSuggestion = ref('');
+const songSubmitted = ref(false);
 let timerId;
+let sliderTimerId;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
 
@@ -24,6 +28,49 @@ const timing = [
   { time: '22:00', title: 'Торт' },
   { time: '23:00', title: 'Окончание вечера' },
 ];
+
+const locationSlides = [
+  {
+    src: '/assets/location/glass-veranda.png',
+    title: 'Место церемонии',
+    caption: 'Стеклянная веранда среди зелени и мягкого дневного света.',
+  },
+  {
+    src: '/assets/location/park-territory.png',
+    title: 'Территория',
+    caption: 'Спокойная прогулочная зона парк-отеля перед началом вечера.',
+  },
+  {
+    src: '/assets/location/evening-veranda.png',
+    title: 'Банкет',
+    caption: 'Вечерний свет, свечи и тёплая атмосфера праздника.',
+  },
+];
+
+const playlist = [
+  'Frank Sinatra — Fly Me To The Moon',
+  'Elvis Presley — Can’t Help Falling in Love',
+  'The Weeknd — Die For You',
+  'Мот — Август это ты',
+];
+
+const loveStory = [
+  {
+    title: 'Знакомство',
+    text: 'Одна встреча стала началом истории, которую теперь хочется продолжать вместе.',
+  },
+  {
+    title: 'Мы рядом',
+    text: 'За это время мы стали друг для друга домом, поддержкой и самым любимым человеком.',
+  },
+  {
+    title: 'Теперь свадьба',
+    text: 'Именно поэтому мы зовём вас быть рядом в день, когда начнётся наша семья.',
+  },
+];
+
+const yandexMapSrc = 'https://yandex.ru/map-widget/v1/?text=%D0%BF%D0%B0%D1%80%D0%BA-%D0%BE%D1%82%D0%B5%D0%BB%D1%8C%20%D0%91%D0%B0%D0%B1%D0%B8%D0%BD%20%D0%B4%D0%B2%D0%BE%D1%80%20%D0%92%D0%B0%D1%81%D1%8E%D0%BA%D0%BE%D0%B2%D0%BE&z=13';
+const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
 const dressColors = [
   { name: 'Бордовый', value: '#6f1725' },
@@ -48,10 +95,15 @@ onMounted(() => {
   timerId = window.setInterval(() => {
     now.value = new Date();
   }, 1000);
+
+  sliderTimerId = window.setInterval(() => {
+    activeLocationSlide.value = (activeLocationSlide.value + 1) % locationSlides.length;
+  }, 5200);
 });
 
 onUnmounted(() => {
   window.clearInterval(timerId);
+  window.clearInterval(sliderTimerId);
   document.body.classList.remove('scroll-locked');
 });
 
@@ -66,6 +118,14 @@ watch(
 function submitRsvp() {
   submitted.value = true;
 }
+
+function setLocationSlide(index) {
+  activeLocationSlide.value = index;
+}
+
+function submitSong() {
+  songSubmitted.value = true;
+}
 </script>
 
 <template>
@@ -79,7 +139,12 @@ function submitRsvp() {
         </span>
         <span class="seal">Нажмите</span>
       </button>
-      <p class="intro-note">Вы не просто так получили это приглашение. В особенный день мы очень хотим, чтобы вы были рядом.</p>
+      <p class="intro-note">
+        <span>Вы не просто так получили</span>
+        <span>это приглашение.</span>
+        <span>В особенный день мы очень хотим,</span>
+        <span>чтобы вы были рядом.</span>
+      </p>
     </section>
 
     <section class="guests section">
@@ -118,9 +183,60 @@ function submitRsvp() {
       <h2>Стеклянная веранда</h2>
       <p>на территории парк-отеля «Бабин двор»</p>
       <p>Московская область, городской округ Солнечногорск, деревня Васюково</p>
-      <a class="button" href="https://yandex.ru/maps/-/CTa-rE9R" target="_blank" rel="noreferrer">
+      <a class="button" :href="routeUrl" target="_blank" rel="noreferrer">
         Открыть Яндекс Карту
       </a>
+    </section>
+
+    <section class="venue-guide section">
+      <div class="venue-slider" aria-label="Фото локации">
+        <div class="venue-slider__media">
+          <img
+            v-for="(slide, index) in locationSlides"
+            :key="slide.src"
+            :class="{ 'is-active': activeLocationSlide === index }"
+            :src="slide.src"
+            :alt="slide.title"
+          />
+        </div>
+        <div class="venue-slider__copy">
+          <p class="kicker">Бабин двор</p>
+          <h2>{{ locationSlides[activeLocationSlide].title }}</h2>
+          <p>{{ locationSlides[activeLocationSlide].caption }}</p>
+          <div class="slider-dots" aria-label="Переключить фото">
+            <button
+              v-for="(slide, index) in locationSlides"
+              :key="slide.title"
+              :class="{ 'is-active': activeLocationSlide === index }"
+              type="button"
+              @click="setLocationSlide(index)"
+            >
+              {{ index + 1 }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-grid">
+        <div class="map-card">
+          <iframe
+            :src="yandexMapSrc"
+            title="Парк-отель Бабин двор на Яндекс Картах"
+            loading="lazy"
+            allowfullscreen
+          />
+        </div>
+        <div class="directions">
+          <p class="kicker">Как добраться</p>
+          <h3>Маршрут без лишних поисков</h3>
+          <ul>
+            <li><strong>На машине:</strong> откройте точку на Яндекс Картах и постройте маршрут.</li>
+            <li><strong>На такси:</strong> покажите водителю парк-отель «Бабин двор», деревня Васюково.</li>
+            <li><strong>Парковка:</strong> ориентируйтесь на парковку на территории площадки.</li>
+          </ul>
+          <a class="button" :href="routeUrl" target="_blank" rel="noreferrer">Построить маршрут</a>
+        </div>
+      </div>
     </section>
 
     <section class="timing section">
@@ -165,6 +281,44 @@ function submitRsvp() {
         Для быстрых вопросов и новостей по свадьбе мы добавим Telegram-чат.
         Ссылку пришлем гостям ближе к дате торжества.
       </p>
+    </section>
+
+    <section class="mood section">
+      <p class="kicker">Настроение</p>
+      <h2>Нам важно ваше настроение</h2>
+      <p>
+        Приходите красивыми, отдохнувшими и готовыми обниматься, смеяться и
+        танцевать. Остальное мы берём на себя.
+      </p>
+    </section>
+
+    <section class="playlist section">
+      <p class="kicker">Музыка вечера</p>
+      <h2>Плейлист</h2>
+      <div class="playlist__grid">
+        <ol>
+          <li v-for="track in playlist" :key="track">{{ track }}</li>
+        </ol>
+        <form class="song-form" @submit.prevent="submitSong">
+          <label>
+            Предложите песню для вечеринки
+            <input v-model="songSuggestion" type="text" placeholder="Название песни или исполнитель" />
+          </label>
+          <button class="button" type="submit">Добавить</button>
+          <p v-if="songSubmitted" class="success">Записали идею: {{ songSuggestion || 'песня-сюрприз' }}.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="love-story section">
+      <p class="kicker">Love story</p>
+      <h2>Коротко о нас</h2>
+      <div class="story-grid">
+        <article v-for="item in loveStory" :key="item.title">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </article>
+      </div>
     </section>
 
     <section class="rsvp section">
