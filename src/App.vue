@@ -203,8 +203,8 @@ async function submitSong() {
         <img class="hero__frame" src="/assets/docx/photo-frame-reference.png" alt="" aria-hidden="true" />
       </div>
       <div class="hero__text">
+        <h1 class="hero__names">Иван<br />&<br />Анна</h1>
         <p class="date hero__date">19.09.2026</p>
-        <h1 class="hero__names">Иван<br />и Анна</h1>
       </div>
     </section>
 
