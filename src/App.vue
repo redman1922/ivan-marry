@@ -189,10 +189,9 @@ async function submitSong() {
       <button class="envelope" type="button" @click="isOpened = true" aria-label="Открыть приглашение">
         <span class="envelope__shade" />
         <span class="envelope__content">
-          <span>Вы приглашены</span>
-          <strong>на свадьбу</strong>
+          <img class="envelope__wedding" src="/assets/docx/wedding-title-reference.svg" alt="на свадьбу" />
         </span>
-        <span class="seal">Нажмите</span>
+        <img class="seal" src="/assets/docx/seal-reference.png" alt="Нажмите" />
       </button>
       <p class="intro-note">
         <span>Вы не просто так получили</span>
