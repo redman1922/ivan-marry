@@ -37,18 +37,15 @@ const timing = [
 const locationSlides = [
   {
     src: '/assets/location/glass-veranda.png',
-    title: 'Место церемонии',
-    caption: 'Стеклянная веранда среди зелени и мягкого дневного света.',
   },
   {
     src: '/assets/location/park-territory.png',
-    title: 'Территория',
-    caption: 'Спокойная прогулочная зона парк-отеля перед началом вечера.',
   },
   {
     src: '/assets/location/evening-veranda.png',
-    title: 'Банкет',
-    caption: 'Вечерний свет, свечи и тёплая атмосфера праздника.',
+  },
+  {
+    src: '/assets/location/glass-veranda-detail.png',
   },
 ];
 
@@ -74,7 +71,6 @@ const loveStory = [
   },
 ];
 
-const yandexMapSrc = 'https://yandex.ru/map-widget/v1/?text=%D0%BF%D0%B0%D1%80%D0%BA-%D0%BE%D1%82%D0%B5%D0%BB%D1%8C%20%D0%91%D0%B0%D0%B1%D0%B8%D0%BD%20%D0%B4%D0%B2%D0%BE%D1%80%20%D0%92%D0%B0%D1%81%D1%8E%D0%BA%D0%BE%D0%B2%D0%BE&z=13';
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
 const dressColors = [
@@ -161,8 +157,8 @@ async function submitRsvp() {
   }
 }
 
-function setLocationSlide(index) {
-  activeLocationSlide.value = index;
+function showNextLocationSlide() {
+  activeLocationSlide.value = (activeLocationSlide.value + 1) % locationSlides.length;
 }
 
 async function submitSong() {
@@ -223,64 +219,36 @@ async function submitSong() {
     </section>
 
     <section class="location section framed">
-      <p class="kicker">Локация</p>
-      <h2>Стеклянная веранда</h2>
-      <p>на территории парк-отеля «Бабин двор»</p>
-      <p>Московская область, городской округ Солнечногорск, деревня Васюково</p>
-      <a class="button" :href="routeUrl" target="_blank" rel="noreferrer">
-        Открыть Яндекс Карту
-      </a>
-    </section>
+      <div class="location__intro">
+        <h2 class="location__title">Локация</h2>
+      </div>
 
-    <section class="venue-guide section">
       <div class="venue-slider" aria-label="Фото локации">
-        <div class="venue-slider__media">
+        <button
+          class="venue-slider__media"
+          type="button"
+          aria-label="Показать следующее фото локации"
+          @click="showNextLocationSlide"
+        >
           <img
             v-for="(slide, index) in locationSlides"
             :key="slide.src"
             :class="{ 'is-active': activeLocationSlide === index }"
             :src="slide.src"
-            :alt="slide.title"
+            alt="Фото локации"
           />
-        </div>
-        <div class="venue-slider__copy">
-          <p class="kicker">Бабин двор</p>
-          <h2>{{ locationSlides[activeLocationSlide].title }}</h2>
-          <p>{{ locationSlides[activeLocationSlide].caption }}</p>
-          <div class="slider-dots" aria-label="Переключить фото">
-            <button
-              v-for="(slide, index) in locationSlides"
-              :key="slide.title"
-              :class="{ 'is-active': activeLocationSlide === index }"
-              type="button"
-              @click="setLocationSlide(index)"
-            >
-              {{ index + 1 }}
-            </button>
-          </div>
-        </div>
+        </button>
       </div>
 
-      <div class="map-grid">
-        <div class="map-card">
-          <iframe
-            :src="yandexMapSrc"
-            title="Парк-отель Бабин двор на Яндекс Картах"
-            loading="lazy"
-            allowfullscreen
-          />
-        </div>
-        <div class="directions">
-          <p class="kicker">Как добраться</p>
-          <h3>Маршрут без лишних поисков</h3>
-          <ul>
-            <li><strong>На машине:</strong> откройте точку на Яндекс Картах и постройте маршрут.</li>
-            <li><strong>На такси:</strong> покажите водителю парк-отель «Бабин двор», деревня Васюково.</li>
-            <li><strong>Парковка:</strong> ориентируйтесь на парковку на территории площадки.</li>
-          </ul>
-          <a class="button" :href="routeUrl" target="_blank" rel="noreferrer">Построить маршрут</a>
-        </div>
+      <div class="location__details">
+        <p class="location__venue">Стеклянная веранда</p>
+        <p class="location__place">на территории парк-отеля «Бабин двор»</p>
+        <p class="location__place">Московская область, городской округ Солнечногорск, деревня Васюково</p>
       </div>
+
+      <a class="button" :href="routeUrl" target="_blank" rel="noreferrer">
+        Открыть Яндекс Карту
+      </a>
     </section>
 
     <section class="timing section">
