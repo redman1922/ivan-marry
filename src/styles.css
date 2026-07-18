@@ -867,6 +867,14 @@ p {
   font-size: 16px;
 }
 
+.rsvp__title {
+  font-family: "primer", Georgia, serif;
+  font-size: clamp(82px, 11vw, 138px);
+  font-weight: 800;
+  line-height: .9;
+  color: var(--burgundy);
+}
+
 .form {
   display: grid;
   gap: 20px;

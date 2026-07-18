@@ -327,8 +327,7 @@ async function submitSong() {
     </section>
 
     <section class="rsvp section">
-      <p class="kicker">Анкета гостя</p>
-      <h2>Подтвердите присутствие</h2>
+      <h2 class="rsvp__title">Анкета гостя</h2>
       <p>Пожалуйста, подтвердите своё присутствие до 1 августа.</p>
 
       <form class="form" @submit.prevent="submitRsvp">
