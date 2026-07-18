@@ -49,28 +49,6 @@ const locationSlides = [
   },
 ];
 
-const playlist = [
-  'Frank Sinatra — Fly Me To The Moon',
-  'Elvis Presley — Can’t Help Falling in Love',
-  'The Weeknd — Die For You',
-  'Мот — Август это ты',
-];
-
-const loveStory = [
-  {
-    title: 'Знакомство',
-    text: 'Одна встреча стала началом истории, которую теперь хочется продолжать вместе.',
-  },
-  {
-    title: 'Мы рядом',
-    text: 'За это время мы стали друг для друга домом, поддержкой и самым любимым человеком.',
-  },
-  {
-    title: 'Теперь свадьба',
-    text: 'Именно поэтому мы зовём вас быть рядом в день, когда начнётся наша семья.',
-  },
-];
-
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
 const dressTextures = [
@@ -325,46 +303,25 @@ async function submitSong() {
             <p>{{ item.text }}</p>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section class="mood section">
-      <p class="kicker">Настроение</p>
-      <h2>Нам важно ваше настроение</h2>
-      <p>
-        Приходите красивыми, отдохнувшими и готовыми обниматься, смеяться и
-        танцевать. Остальное мы берём на себя.
-      </p>
-    </section>
-
-    <section class="playlist section">
-      <p class="kicker">Музыка вечера</p>
-      <h2>Плейлист</h2>
-      <div class="playlist__grid">
-        <ol>
-          <li v-for="track in playlist" :key="track">{{ track }}</li>
-        </ol>
-        <form class="song-form" @submit.prevent="submitSong">
-          <label>
-            Предложите песню для вечеринки
-            <input v-model="songSuggestion" type="text" placeholder="Название песни или исполнитель" />
-          </label>
-          <button class="button" type="submit" :disabled="songSubmitting">
-            {{ songSubmitting ? 'Отправляем...' : 'Добавить' }}
-          </button>
-          <p v-if="songSubmitted" class="success">Записали идею: {{ songSuggestion || 'песня-сюрприз' }}.</p>
-          <p v-if="songError" class="error">{{ songError }}</p>
-        </form>
-      </div>
-    </section>
-
-    <section class="love-story section">
-      <p class="kicker">Love story</p>
-      <h2>Коротко о нас</h2>
-      <div class="story-grid">
-        <article v-for="item in loveStory" :key="item.title">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
+        <article class="wish-item wish-item--song">
+          <img class="wish-item__icon" src="/assets/wishes/music.svg" alt="" aria-hidden="true" />
+          <div>
+            <h3>Плейлист</h3>
+            <p>
+              Мы будем рады, если вы поделитесь песней, которая точно должна прозвучать на нашем празднике.
+            </p>
+            <form class="song-form wish-song-form" @submit.prevent="submitSong">
+              <label>
+                Ваша песня
+                <input v-model="songSuggestion" type="text" placeholder="Название песни или исполнитель" />
+              </label>
+              <button class="button" type="submit" :disabled="songSubmitting">
+                {{ songSubmitting ? 'Отправляем...' : 'Добавить песню' }}
+              </button>
+              <p v-if="songSubmitted" class="success">Записали идею: {{ songSuggestion || 'песня-сюрприз' }}.</p>
+              <p v-if="songError" class="error">{{ songError }}</p>
+            </form>
+          </div>
         </article>
       </div>
     </section>
