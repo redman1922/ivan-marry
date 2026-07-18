@@ -27,11 +27,11 @@ const rsvp = ref({
 });
 
 const timing = [
-  { time: '16:00', title: 'Сбор гостей' },
-  { time: '17:00', title: 'Церемония' },
-  { time: '18:00', title: 'Банкет' },
-  { time: '22:00', title: 'Торт' },
-  { time: '23:00', title: 'Окончание вечера' },
+  { time: '16:00', title: 'Сбор гостей', icon: '/assets/timing/guests.svg' },
+  { time: '17:00', title: 'Церемония', icon: '/assets/timing/ceremony.svg' },
+  { time: '18:00', title: 'Банкет', icon: '/assets/timing/banquet.svg' },
+  { time: '22:00', title: 'Торт', icon: '/assets/timing/cake.svg' },
+  { time: '23:00', title: 'Окончание вечера', icon: '/assets/timing/finish.svg' },
 ];
 
 const locationSlides = [
@@ -252,15 +252,18 @@ async function submitSong() {
     </section>
 
     <section class="timing section">
-      <p class="kicker">Тайминг дня</p>
-      <h2>План вечера</h2>
-      <p class="muted">Тайминг пока ориентировочный, возможно чуть позже мы его уточним.</p>
+      <h2 class="timing__title">Тайминг дня</h2>
+      <p class="timing__quote">
+        Жизнь – прекрасное путешествие. Глупо тратить бесценное время на то, что не про любовь
+      </p>
       <div class="timeline">
-        <span class="timeline__heart">♥</span>
+        <img class="timeline__line" src="/assets/timing/timing-line.svg" alt="" aria-hidden="true" />
         <div v-for="item in timing" :key="item.time" class="timeline__item">
-          <strong>{{ item.time }}</strong>
-          <i />
-          <span>{{ item.title }}</span>
+          <img class="timeline__icon" :src="item.icon" alt="" aria-hidden="true" />
+          <div class="timeline__copy">
+            <strong>{{ item.time }}</strong>
+            <span>{{ item.title }}</span>
+          </div>
         </div>
       </div>
     </section>
