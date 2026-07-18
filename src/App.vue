@@ -213,21 +213,13 @@ async function submitSong() {
     </section>
 
     <section class="guests section">
-      <img class="guests__title" src="/assets/docx/dear-guests-reference.svg" alt="Дорогие гости" />
-      <p>
-        Скоро наступит очень важный для нас день. Мы очень хотим сделать его
-        особенным и приглашаем вас разделить с нами торжество, посвящённое дню
-        нашей свадьбы.
+      <h2 class="date-section__title">Дорогие гости!</h2>
+      <p class="date-section__text">
+        Мы приглашаем вас разделить с нами радостный день, в который мы станем семьёй!
+        <br /><br />
+        В этот волшебный день мы скажем друг другу «Да» и соединим наши сердца и судьбы в окружении самых близких и родных людей.
       </p>
-    </section>
-
-    <section class="date-section section">
-      <p class="kicker">Наш сентябрь</p>
-      <h2>19 сентября 2026</h2>
-      <p>
-        Скоро наступит очень важный для нас день. Мы будем счастливы разделить
-        с вами начало нашей семейной истории.
-      </p>
+      <img class="date-section__calendar" src="/assets/docx/date-reference.svg" alt="19 сентября 2026" />
     </section>
 
     <section class="location section framed">

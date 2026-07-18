@@ -10,6 +10,22 @@
   --shadow: rgba(72, 16, 26, .18);
 }
 
+@font-face {
+  font-family: "primer";
+  src: url("https://static.tildacdn.com/tild6432-3765-4963-a162-336334356133/Forum-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "primer";
+  src: url("https://static.tildacdn.com/tild6462-6235-4234-b335-323535366661/Floriselscript.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -240,12 +256,6 @@ input {
     radial-gradient(circle at 50% 50%, rgba(255, 250, 240, .75), transparent 48%);
 }
 
-.date-section::before {
-  background:
-    radial-gradient(ellipse at 50% 12%, rgba(111, 23, 37, .12), transparent 34%),
-    linear-gradient(180deg, rgba(255,250,240,.1), rgba(223,185,183,.16), rgba(255,250,240,.04));
-}
-
 .location::before {
   background:
     linear-gradient(180deg, rgba(255, 250, 240, .14), rgba(248, 240, 223, .34), rgba(255, 250, 240, .1)),
@@ -326,7 +336,6 @@ input {
 
 .hero::before,
 .guests::before,
-.date-section::before,
 .location::before,
 .timing::before,
 .dress::before,
@@ -401,14 +410,37 @@ fieldset,
 }
 
 .guests {
-  padding-top: clamp(64px, 8vw, 112px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(520px, calc(100% - 36px));
+  padding-top: clamp(70px, 8vw, 112px);
 }
 
-.guests__title {
+.date-section__title {
+  font-family: "primer", Georgia, serif;
+  width: min(520px, 100%);
+  font-size: clamp(68px, 8vw, 92px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--burgundy);
+}
+
+.date-section__text {
+  width: min(375px, 100%);
+  margin: 22px auto 0;
+  color: color-mix(in srgb, var(--burgundy) 88%, var(--brown));
+  font-family: "primer", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.45;
+}
+
+.date-section__calendar {
   display: block;
-  width: min(520px, 82vw);
+  width: min(325px, 88vw);
   height: auto;
-  margin: 0 auto 30px;
+  margin: clamp(30px, 4vw, 42px) auto 0;
 }
 
 .kicker {
@@ -897,10 +929,6 @@ input[type="checkbox"] {
     order: 3;
     text-align: center;
     font-size: clamp(66px, 18vw, 118px);
-  }
-
-  .guests__title {
-    width: min(360px, 92vw);
   }
 
   .intro-note {
