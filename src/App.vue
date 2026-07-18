@@ -367,14 +367,17 @@ async function submitSong() {
     </section>
 
     <section class="countdown section">
-      <p class="kicker">До свадьбы осталось</p>
+      <h2 class="countdown__title">Мы скажем «Да» через</h2>
       <div class="countdown__grid">
         <div><strong>{{ countdown.days }}</strong><span>дней</span></div>
         <div><strong>{{ countdown.hours }}</strong><span>часов</span></div>
         <div><strong>{{ countdown.minutes }}</strong><span>минут</span></div>
         <div><strong>{{ countdown.seconds }}</strong><span>секунд</span></div>
       </div>
-      <p class="signature">С любовью, Иван и Анна!</p>
+      <p class="signature">
+        <span>С любовью,</span>
+        <span>Иван и Анна!</span>
+      </p>
     </section>
   </main>
 </template>
