@@ -73,13 +73,12 @@ const loveStory = [
 
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
-const dressColors = [
-  { name: 'Бордовый', value: '#6f1725' },
-  { name: 'Зеленый', value: '#233318' },
-  { name: 'Оливковый', value: '#687442' },
-  { name: 'Бежевый', value: '#d8c3a5' },
-  { name: 'Коричневый', value: '#5a3929' },
-  { name: 'Нежно-розовый', value: '#e9c8c8' },
+const dressTextures = [
+  { name: 'Пудровый атлас', src: '/assets/dress/satin-blush.png' },
+  { name: 'Шампань', src: '/assets/dress/satin-champagne.png' },
+  { name: 'Бордовый атлас', src: '/assets/dress/satin-burgundy.png' },
+  { name: 'Оливковый атлас', src: '/assets/dress/satin-olive.png' },
+  { name: 'Коричневый атлас', src: '/assets/dress/satin-brown.png' },
 ];
 
 const countdown = computed(() => {
@@ -269,19 +268,27 @@ async function submitSong() {
     </section>
 
     <section class="dress section">
-      <p class="kicker">Dress code</p>
-      <h2>Цветовая гамма</h2>
-      <p>
-        Мы будем вам признательны, если вы поддержите цветовую гамму торжества
-        в одежде.
+      <h2 class="dress__title">Дресс-код</h2>
+      <p class="dress__lead">
+        Мы создаем наш свадебный день с особым трепетом. И нам будет очень приятно,
+        если вы поддержите цветовую гамму:
       </p>
-      <div class="palette">
-        <figure v-for="color in dressColors" :key="color.name">
-          <span :style="{ backgroundColor: color.value }" />
-          <figcaption>{{ color.name }}</figcaption>
+      <div class="palette" aria-label="Цветовая гамма дресс-кода">
+        <figure v-for="texture in dressTextures" :key="texture.name">
+          <img :src="texture.src" :alt="texture.name" />
         </figure>
       </div>
-      <img class="dress__reference" src="/assets/docx/dress-code-reference.png" alt="Референс дресс-кода" />
+      <div class="dress__notes">
+        <p>
+          <strong>Для дам:</strong>
+          вечерние и коктейльные платья в предложенных оттенках. Также это могут быть корсеты, юбки, костюмы.
+          Просим избегать белого цвета и ярких неоновых оттенков.
+        </p>
+        <p>
+          <strong>Для джентльменов:</strong>
+          классические костюмы черного или любых оттенков коричневого цвета. Смокинги, жилеты, светлые рубашки или поло.
+        </p>
+      </div>
     </section>
 
     <section class="details section framed">
