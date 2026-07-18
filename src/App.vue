@@ -201,26 +201,24 @@ async function submitSong() {
       </p>
     </section>
 
+    <section class="hero section" :class="{ 'is-visible': isOpened }">
+      <div class="hero__image">
+        <img class="hero__photo" src="/assets/couple-hero.png" alt="Иван и Анна" />
+        <img class="hero__frame" src="/assets/docx/photo-frame-reference.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="hero__text">
+        <p class="date hero__date">19.09.2026</p>
+        <h1 class="hero__names">Иван<br />и Анна</h1>
+      </div>
+    </section>
+
     <section class="guests section">
-      <p class="kicker">Дорогие гости</p>
-      <h2>Мы ждём вас</h2>
+      <img class="guests__title" src="/assets/docx/dear-guests-reference.svg" alt="Дорогие гости" />
       <p>
         Скоро наступит очень важный для нас день. Мы очень хотим сделать его
         особенным и приглашаем вас разделить с нами торжество, посвящённое дню
         нашей свадьбы.
       </p>
-    </section>
-
-    <section class="hero section" :class="{ 'is-visible': isOpened }">
-      <div class="hero__image">
-        <img src="/assets/couple-hero.png" alt="Иван и Анна" />
-      </div>
-      <div class="hero__text">
-        <p class="kicker">С любовью приглашаем</p>
-        <h1>Иван<br />и Анна</h1>
-        <p class="date">19.09.2026</p>
-        <p>19 сентября 2026</p>
-      </div>
     </section>
 
     <section class="date-section section">
