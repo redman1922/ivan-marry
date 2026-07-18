@@ -81,6 +81,29 @@ const dressTextures = [
   { name: 'Коричневый атлас', src: '/assets/dress/satin-brown.png' },
 ];
 
+const wishItems = [
+  {
+    title: 'Конверты',
+    icon: '/assets/wishes/envelope.svg',
+    text: 'Ваши улыбки и смех подарят нам незабываемое счастье в этот день, а пожелания в конвертах помогут осуществить наши мечты!',
+  },
+  {
+    title: 'Цветочек',
+    icon: '/assets/wishes/flower.svg',
+    text: 'Мы будем рады, если вместо букета цветов вы подарите нам только один цветочек, с которым мы у вас ассоциируемся. К концу праздника у нас будет особенный букет, собранный с любовью.',
+  },
+  {
+    title: 'Детки',
+    icon: '/assets/wishes/kids.svg',
+    text: 'Мы от всего сердца хотим, чтобы вы смогли расслабиться и насладиться каждым мгновением нашего праздника. Заранее благодарим за то, что позаботитесь о присмотре за вашими чудесными детками!',
+  },
+  {
+    title: 'Горько',
+    icon: '/assets/wishes/gorko.svg',
+    text: 'От всего сердца просим вас воздержаться от криков «Горько!» и сохранить атмосферу уютного семейного праздника.',
+  },
+];
+
 const countdown = computed(() => {
   const diff = Math.max(weddingDate.getTime() - now.value.getTime(), 0);
   const days = Math.floor(diff / 86400000);
@@ -292,17 +315,17 @@ async function submitSong() {
     </section>
 
     <section class="details section framed">
-      <p class="kicker">Детали</p>
-      <h2>Пожелания</h2>
-      <p>
-        Пожалуйста, не дарите нам цветы, так как мы не успеем насладиться их
-        красотой до отъезда в свадебное путешествие. Если вы хотите сделать нам
-        комплимент, замените букет бутылочкой вина или цветочной подпиской.
-      </p>
-      <p>
-        Для быстрых вопросов и новостей по свадьбе мы добавим Telegram-чат.
-        Ссылку пришлем гостям ближе к дате торжества.
-      </p>
+      <h2 class="details__title">Пожелания</h2>
+      <img class="details__flower" src="/assets/wishes/decor-extra.png" alt="" aria-hidden="true" />
+      <div class="wish-list">
+        <article v-for="item in wishItems" :key="item.title" class="wish-item">
+          <img class="wish-item__icon" :src="item.icon" alt="" aria-hidden="true" />
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="mood section">

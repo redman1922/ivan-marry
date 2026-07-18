@@ -315,6 +315,10 @@ input {
   box-shadow: 0 18px 58px rgba(72, 16, 26, .045);
 }
 
+.details.framed {
+  overflow: hidden;
+}
+
 .rsvp::before {
   background:
     linear-gradient(180deg, rgba(255,250,240,.35), rgba(111,23,37,.055), rgba(255,250,240,.35)),
@@ -745,6 +749,79 @@ p {
   font-weight: 800;
 }
 
+.details {
+  width: min(820px, calc(100% - 36px));
+}
+
+.details__title {
+  position: relative;
+  z-index: 1;
+  font-family: "primer", Georgia, serif;
+  font-size: clamp(82px, 11vw, 138px);
+  font-weight: 800;
+  line-height: .9;
+  color: var(--burgundy);
+}
+
+.details__flower {
+  display: block;
+  width: min(260px, 56vw);
+  margin: -4px auto clamp(22px, 4vw, 38px);
+  filter: drop-shadow(0 16px 34px rgba(72, 16, 26, .1));
+}
+
+.wish-list {
+  display: grid;
+  gap: clamp(18px, 3vw, 28px);
+  width: min(640px, 100%);
+  margin: 0 auto;
+}
+
+.wish-item {
+  display: grid;
+  grid-template-columns: clamp(72px, 10vw, 98px) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 26px);
+  align-items: center;
+  text-align: left;
+}
+
+.wish-item:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) clamp(72px, 10vw, 98px);
+  text-align: right;
+}
+
+.wish-item:nth-child(even) .wish-item__icon {
+  order: 2;
+}
+
+.wish-item:nth-child(even) div {
+  order: 1;
+}
+
+.wish-item__icon {
+  display: block;
+  width: 100%;
+  max-height: 98px;
+  object-fit: contain;
+  filter: sepia(.4) saturate(.82) hue-rotate(318deg) brightness(.82);
+}
+
+.wish-item h3 {
+  margin: 0 0 8px;
+  font-family: "primer", Georgia, serif;
+  font-size: clamp(30px, 4.2vw, 46px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--burgundy);
+}
+
+.wish-item p {
+  margin: 0;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--burgundy) 86%, var(--brown));
+}
+
 .venue-slider {
   width: min(760px, 100%);
   margin: 0 auto;
@@ -1075,6 +1152,38 @@ input[type="checkbox"] {
 
   .dress__notes {
     text-align: center;
+  }
+
+  .details {
+    width: min(560px, calc(100% - 28px));
+  }
+
+  .details__title {
+    font-size: clamp(76px, 23vw, 112px);
+  }
+
+  .details__flower {
+    width: min(230px, 62vw);
+  }
+
+  .wish-list {
+    width: min(360px, 100%);
+  }
+
+  .wish-item,
+  .wish-item:nth-child(even) {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 14px;
+    text-align: left;
+  }
+
+  .wish-item:nth-child(even) .wish-item__icon,
+  .wish-item:nth-child(even) div {
+    order: initial;
+  }
+
+  .wish-item h3 {
+    font-size: clamp(28px, 10vw, 40px);
   }
 
   .venue-slider__media {
