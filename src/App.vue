@@ -11,11 +11,13 @@ const rsvpSubmitting = ref(false);
 const rsvpError = ref('');
 const songSubmitting = ref(false);
 const songError = ref('');
+const bgAudio = ref(null);
 let timerId;
 let sliderTimerId;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
 const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
+const musicSrc = 'https://dl.dropbox.com/scl/fi/gfcy12x559hdbopns63qq/fkj_-_Ylang_Ylang.mp3?rlkey=osj439un4o3qkp60b6pmvc4ck&st=dtxikddz&dl=0';
 
 const rsvp = ref({
   attendance: '',
@@ -105,6 +107,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.clearInterval(timerId);
   window.clearInterval(sliderTimerId);
+  bgAudio.value?.pause();
   document.body.classList.remove('scroll-locked');
 });
 
@@ -133,6 +136,25 @@ async function sendToGoogleSheets(type, payload) {
       sentAt: new Date().toISOString(),
     }),
   });
+}
+
+async function playMusic() {
+  if (!bgAudio.value) {
+    return;
+  }
+
+  bgAudio.value.volume = 0.4;
+
+  try {
+    await bgAudio.value.play();
+  } catch {
+    // Browser may block audio if the click is not treated as a direct user gesture.
+  }
+}
+
+async function openInvitation() {
+  isOpened.value = true;
+  await playMusic();
 }
 
 async function submitRsvp() {
@@ -181,8 +203,12 @@ async function submitSong() {
 
 <template>
   <main class="site">
+    <audio ref="bgAudio" preload="auto" loop>
+      <source :src="musicSrc" type="audio/mpeg" />
+    </audio>
+
     <section class="envelope-screen" :class="{ 'is-opened': isOpened }">
-      <button class="envelope" type="button" @click="isOpened = true" aria-label="Открыть приглашение">
+      <button class="envelope" type="button" @click="openInvitation" aria-label="Открыть приглашение">
         <span class="envelope__shade" />
         <span class="envelope__content">
           <img class="envelope__wedding" src="/assets/docx/wedding-title-reference.svg" alt="на свадьбу" />
