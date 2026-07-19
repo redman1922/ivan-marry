@@ -404,6 +404,17 @@ async function submitSong() {
             </form>
           </div>
         </article>
+        <article class="wish-item wish-item--telegram">
+          <img class="wish-item__icon" src="/assets/wishes/telegram.svg?v=3" alt="" aria-hidden="true" />
+          <div>
+            <p>
+              Мы создали телеграм-чат нашего праздника, где можно будет узнать дополнительную информацию, а также поделиться фотографиями и видео в день свадьбы и после.
+            </p>
+            <a class="button telegram-button" href="https://t.me/+r9tqcAYtGUAwMTZi" target="_blank" rel="noreferrer">
+              Вступить
+            </a>
+          </div>
+        </article>
       </div>
     </section>
 

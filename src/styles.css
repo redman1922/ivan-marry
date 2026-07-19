@@ -765,8 +765,19 @@ p {
   filter: sepia(.4) saturate(.82) hue-rotate(318deg) brightness(.82);
 }
 
-.wish-item p {
+.wish-item > div {
   width: min(560px, 100%);
+  margin: 0 auto;
+}
+
+.telegram-button {
+  display: flex;
+  width: fit-content;
+  margin: 18px auto 0;
+}
+
+.wish-item p {
+  width: 100%;
   margin: 0;
   font-size: clamp(16px, 1.8vw, 20px);
   line-height: 1.5;
@@ -819,7 +830,8 @@ p {
 }
 
 .wish-song-form {
-  margin-top: 16px;
+  width: min(560px, 100%);
+  margin: 16px auto 0;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 12px;
