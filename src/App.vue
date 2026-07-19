@@ -43,12 +43,6 @@ const locationSlides = [
   {
     src: '/assets/location/park-territory.png',
   },
-  {
-    src: '/assets/location/evening-veranda.png',
-  },
-  {
-    src: '/assets/location/glass-veranda-detail.png',
-  },
 ];
 
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
