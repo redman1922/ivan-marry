@@ -28,7 +28,7 @@ const rsvp = ref({
   attendance: '',
   name: '',
   guests: '',
-  meal: '',
+  overnight: '',
   drinks: [],
   telegram: '',
 });
@@ -224,7 +224,7 @@ async function submitRsvp() {
       attendance: rsvp.value.attendance,
       name: rsvp.value.name,
       guests: rsvp.value.guests,
-      meal: rsvp.value.meal,
+      overnight: rsvp.value.overnight,
       drinks: [...rsvp.value.drinks],
       telegram: rsvp.value.telegram,
     });
@@ -377,7 +377,7 @@ async function submitSong() {
     </section>
 
     <section class="details section">
-      <h2 class="details__title">Пожелания</h2>
+      <h2 class="details__title">Детали</h2>
       <div class="wish-list">
         <article v-for="item in wishItems" :key="item.title" class="wish-item">
           <img class="wish-item__icon" :src="item.icon" alt="" aria-hidden="true" />
@@ -402,6 +402,14 @@ async function submitSong() {
               <p v-if="songSubmitted" class="success">Записали идею: {{ songSuggestion || 'песня-сюрприз' }}.</p>
               <p v-if="songError" class="error">{{ songError }}</p>
             </form>
+          </div>
+        </article>
+        <article class="wish-item wish-item--stay">
+          <img class="wish-item__icon" src="/assets/wishes/house.svg" alt="" aria-hidden="true" />
+          <div>
+            <p>
+              Дорогие гости! Для вашего комфорта мы предусмотрели возможность переночевать в домиках на территории парк-отеля, где будет проходить праздник. Возьмите с собой сменную одежду и купальники, если захотите отдохнуть в бане.
+            </p>
           </div>
         </article>
         <article class="wish-item wish-item--telegram">
@@ -434,10 +442,9 @@ async function submitSong() {
         <label>Ваш Telegram для связи<input v-model="rsvp.telegram" type="text" placeholder="@username" /></label>
 
         <fieldset>
-          <legend>Какое горячее вы предпочитаете?</legend>
-          <label><input v-model="rsvp.meal" type="radio" value="Мясо" /> Мясо</label>
-          <label><input v-model="rsvp.meal" type="radio" value="Курица" /> Курица</label>
-          <label><input v-model="rsvp.meal" type="radio" value="Рыба" /> Рыба</label>
+          <legend>Будете ли вы оставаться на ночь?</legend>
+          <label><input v-model="rsvp.overnight" type="radio" value="Да" /> Да</label>
+          <label><input v-model="rsvp.overnight" type="radio" value="Нет" /> Нет</label>
         </fieldset>
 
         <fieldset>
@@ -446,7 +453,9 @@ async function submitSong() {
           <label><input v-model="rsvp.drinks" type="checkbox" value="Вино красное" /> Вино красное</label>
           <label><input v-model="rsvp.drinks" type="checkbox" value="Шампанское" /> Шампанское</label>
           <label><input v-model="rsvp.drinks" type="checkbox" value="Джин" /> Джин</label>
-          <label><input v-model="rsvp.drinks" type="checkbox" value="Крепкий алкоголь" /> Крепкий алкоголь</label>
+          <label><input v-model="rsvp.drinks" type="checkbox" value="Виски" /> Виски</label>
+          <label><input v-model="rsvp.drinks" type="checkbox" value="Водка" /> Водка</label>
+          <label><input v-model="rsvp.drinks" type="checkbox" value="Коньяк" /> Коньяк</label>
           <label><input v-model="rsvp.drinks" type="checkbox" value="Безалкогольные напитки" /> Безалкогольные напитки</label>
         </fieldset>
 
