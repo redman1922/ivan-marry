@@ -459,12 +459,17 @@ async function submitSong() {
     </section>
 
     <section class="countdown section">
+      <img class="countdown__rings" src="/assets/countdown/rings.svg" alt="" aria-hidden="true" />
       <h2 class="countdown__title">Мы скажем «Да» через</h2>
       <div class="countdown__grid">
         <div><strong>{{ countdown.days }}</strong><span>дней</span></div>
         <div><strong>{{ countdown.hours }}</strong><span>часов</span></div>
         <div><strong>{{ countdown.minutes }}</strong><span>минут</span></div>
         <div><strong>{{ countdown.seconds }}</strong><span>секунд</span></div>
+      </div>
+      <div class="countdown__photo">
+        <img class="countdown__photo-img" src="/assets/couple-hero.png" alt="Иван и Анна" />
+        <img class="countdown__photo-frame" src="/assets/docx/photo-frame-reference.png" alt="" aria-hidden="true" />
       </div>
       <p class="signature">
         <span>С любовью,</span>
