@@ -12,12 +12,17 @@ const rsvpError = ref('');
 const songSubmitting = ref(false);
 const songError = ref('');
 const bgAudio = ref(null);
+const timelineEl = ref(null);
+const timelinePath = ref(null);
+const heartProgress = ref(0);
 let timerId;
 let sliderTimerId;
+let scrollRafId = 0;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
 const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 const musicSrc = 'https://dl.dropbox.com/scl/fi/gfcy12x559hdbopns63qq/fkj_-_Ylang_Ylang.mp3?rlkey=osj439un4o3qkp60b6pmvc4ck&st=dtxikddz&dl=0';
+const timingLinePath = 'M44 18 C150 78 270 144 276 250 C282 354 136 386 94 500 C58 598 178 652 238 734 C320 846 116 900 84 1032 C58 1142 174 1200 238 1288 C316 1394 144 1460 92 1588 C46 1704 154 1782 234 1878 C318 1980 220 2090 48 2228';
 
 const rsvp = ref({
   attendance: '',
@@ -88,6 +93,55 @@ const countdown = computed(() => {
   return { days, hours, minutes, seconds };
 });
 
+const timelineHeartStyle = computed(() => {
+  const progress = heartProgress.value;
+  const path = timelinePath.value;
+  const timeline = timelineEl.value;
+  const rotate = -10 + progress * 18;
+  const scale = .92 + Math.sin(progress * Math.PI) * .13;
+
+  if (!path || !timeline) {
+    return {
+      transform: `translate(-50%, 0) rotate(${rotate.toFixed(1)}deg) scale(${scale.toFixed(2)})`,
+    };
+  }
+
+  const length = path.getTotalLength();
+  const point = path.getPointAtLength(length * progress);
+  const svgRect = path.ownerSVGElement.getBoundingClientRect();
+  const timelineRect = timeline.getBoundingClientRect();
+  const x = svgRect.left - timelineRect.left + (point.x / 321) * svgRect.width;
+  const y = svgRect.top - timelineRect.top + (point.y / 2245) * svgRect.height;
+
+  return {
+    transform: `translate(calc(${x.toFixed(1)}px - 50%), calc(${y.toFixed(1)}px - 50%)) rotate(${rotate.toFixed(1)}deg) scale(${scale.toFixed(2)})`,
+  };
+});
+
+function updateHeartProgress() {
+  scrollRafId = 0;
+
+  if (!timelineEl.value) {
+    return;
+  }
+
+  const rect = timelineEl.value.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const start = viewportHeight * .68;
+  const travel = Math.max(rect.height - viewportHeight * .18, 1);
+  const nextProgress = Math.min(Math.max((start - rect.top) / travel, 0), 1);
+
+  heartProgress.value = nextProgress;
+}
+
+function requestHeartUpdate() {
+  if (scrollRafId) {
+    return;
+  }
+
+  scrollRafId = window.requestAnimationFrame(updateHeartProgress);
+}
+
 onMounted(() => {
   timerId = window.setInterval(() => {
     now.value = new Date();
@@ -96,11 +150,20 @@ onMounted(() => {
   sliderTimerId = window.setInterval(() => {
     activeLocationSlide.value = (activeLocationSlide.value + 1) % locationSlides.length;
   }, 5200);
+
+  updateHeartProgress();
+  window.addEventListener('scroll', requestHeartUpdate, { passive: true });
+  window.addEventListener('resize', requestHeartUpdate);
 });
 
 onUnmounted(() => {
   window.clearInterval(timerId);
   window.clearInterval(sliderTimerId);
+  if (scrollRafId) {
+    window.cancelAnimationFrame(scrollRafId);
+  }
+  window.removeEventListener('scroll', requestHeartUpdate);
+  window.removeEventListener('resize', requestHeartUpdate);
   bgAudio.value?.pause();
   document.body.classList.remove('scroll-locked');
 });
@@ -273,11 +336,12 @@ async function submitSong() {
 
     <section class="timing section">
       <h2 class="timing__title">Тайминг дня</h2>
-      <p class="timing__quote">
-        Жизнь – прекрасное путешествие. Глупо тратить бесценное время на то, что не про любовь
-      </p>
-      <div class="timeline">
+      <div ref="timelineEl" class="timeline">
         <img class="timeline__line" src="/assets/timing/timing-line.svg" alt="" aria-hidden="true" />
+        <svg class="timeline__curve" viewBox="0 0 321 2245" preserveAspectRatio="none" aria-hidden="true">
+          <path ref="timelinePath" :d="timingLinePath" />
+        </svg>
+        <span class="timeline__heart" :style="timelineHeartStyle" aria-hidden="true">♥</span>
         <div v-for="item in timing" :key="item.time" class="timeline__item">
           <img class="timeline__icon" :src="item.icon" alt="" aria-hidden="true" />
           <div class="timeline__copy">
