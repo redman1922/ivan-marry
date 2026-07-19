@@ -238,7 +238,7 @@ async function submitSong() {
       <img class="date-section__calendar" src="/assets/docx/date-reference.svg" alt="19 сентября 2026" />
     </section>
 
-    <section class="location section framed">
+    <section class="location section">
       <div class="location__intro">
         <h2 class="location__title">Локация</h2>
       </div>
