@@ -384,6 +384,10 @@ fieldset,
   color: color-mix(in srgb, var(--burgundy) 88%, var(--brown));
 }
 
+.hero__season {
+  display: none;
+}
+
 .guests {
   display: flex;
   flex-direction: column;
@@ -1060,20 +1064,32 @@ input[type="checkbox"] {
   }
 
   .hero__date {
-    order: 3;
-    margin: 12px 0 0;
+    order: 1;
+    margin: 0 0 8px;
+    font-size: clamp(38px, 12vw, 54px);
   }
 
   .hero__image {
-    order: 1;
+    order: 3;
     width: min(360px, 92vw);
     margin: 0 auto;
   }
 
   .hero__names {
-    order: 2;
+    order: 4;
     text-align: center;
     font-size: clamp(68px, 18vw, 112px);
+  }
+
+  .hero__season {
+    order: 2;
+    display: block;
+    margin: 0 0 12px;
+    font-family: "primer", Georgia, serif;
+    font-size: clamp(40px, 13vw, 64px);
+    font-weight: 800;
+    line-height: .9;
+    color: color-mix(in srgb, var(--burgundy) 82%, var(--olive));
   }
 
   .intro-note {
