@@ -53,11 +53,11 @@ const locationSlides = [
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
 const dressTextures = [
-  { name: 'Пудровый атлас', src: '/assets/dress/satin-blush.png' },
-  { name: 'Шампань', src: '/assets/dress/satin-champagne.png' },
   { name: 'Бордовый атлас', src: '/assets/dress/satin-burgundy.png' },
   { name: 'Оливковый атлас', src: '/assets/dress/satin-olive.png' },
   { name: 'Коричневый атлас', src: '/assets/dress/satin-brown.png' },
+  { name: 'Шампань', src: '/assets/dress/satin-champagne.png' },
+  { name: 'Пудровый атлас', src: '/assets/dress/satin-blush.png' },
 ];
 
 const wishItems = [
