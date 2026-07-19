@@ -281,24 +281,12 @@ input {
     radial-gradient(circle at 20% 70%, rgba(111, 23, 37, .045), transparent 34%);
 }
 
-.details.framed {
-  border-color: rgba(111, 23, 37, .14);
-  background:
-    linear-gradient(160deg, rgba(255, 250, 240, .4), rgba(248, 240, 223, .3)),
-    rgba(255, 250, 240, .24);
-  box-shadow: 0 18px 58px rgba(72, 16, 26, .045);
-}
-
 .location.framed {
   border-color: rgba(111, 23, 37, .14);
   background:
     linear-gradient(145deg, rgba(255, 250, 240, .38), rgba(248, 240, 223, .28)),
     rgba(255, 250, 240, .24);
   box-shadow: 0 18px 58px rgba(72, 16, 26, .045);
-}
-
-.details.framed {
-  overflow: hidden;
 }
 
 .rsvp::before {
@@ -325,7 +313,6 @@ input {
 }
 
 .location.framed,
-.details.framed,
 fieldset,
 .countdown__grid div {
   background:
@@ -756,59 +743,30 @@ p {
   color: var(--burgundy);
 }
 
-.details__flower {
-  display: block;
-  width: min(260px, 56vw);
-  margin: -4px auto clamp(22px, 4vw, 38px);
-  filter: drop-shadow(0 16px 34px rgba(72, 16, 26, .1));
-}
-
 .wish-list {
   display: grid;
-  gap: clamp(18px, 3vw, 28px);
+  gap: clamp(34px, 5vw, 54px);
   width: min(640px, 100%);
   margin: 0 auto;
 }
 
 .wish-item {
   display: grid;
-  grid-template-columns: clamp(72px, 10vw, 98px) minmax(0, 1fr);
-  gap: clamp(16px, 3vw, 26px);
-  align-items: center;
-  text-align: left;
-}
-
-.wish-item:nth-child(even) {
-  grid-template-columns: minmax(0, 1fr) clamp(72px, 10vw, 98px);
-  text-align: right;
-}
-
-.wish-item:nth-child(even) .wish-item__icon {
-  order: 2;
-}
-
-.wish-item:nth-child(even) div {
-  order: 1;
+  justify-items: center;
+  gap: clamp(14px, 2.6vw, 22px);
+  text-align: center;
 }
 
 .wish-item__icon {
   display: block;
-  width: 100%;
-  max-height: 98px;
+  width: clamp(118px, 17vw, 168px);
+  max-height: 168px;
   object-fit: contain;
   filter: sepia(.4) saturate(.82) hue-rotate(318deg) brightness(.82);
 }
 
-.wish-item h3 {
-  margin: 0 0 8px;
-  font-family: "primer", Georgia, serif;
-  font-size: clamp(30px, 4.2vw, 46px);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--burgundy);
-}
-
 .wish-item p {
+  width: min(560px, 100%);
   margin: 0;
   font-size: clamp(16px, 1.8vw, 20px);
   line-height: 1.5;
@@ -862,6 +820,8 @@ p {
 
 .wish-song-form {
   margin-top: 16px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
   gap: 12px;
 }
 
@@ -869,6 +829,11 @@ p {
   font-size: 14px;
   font-weight: 800;
   color: color-mix(in srgb, var(--burgundy) 88%, var(--brown));
+}
+
+.wish-song-form .success,
+.wish-song-form .error {
+  grid-column: 1 / -1;
 }
 
 .wish-song-form input {
@@ -1204,28 +1169,22 @@ input[type="checkbox"] {
     font-size: clamp(76px, 23vw, 112px);
   }
 
-  .details__flower {
-    width: min(230px, 62vw);
-  }
-
   .wish-list {
     width: min(360px, 100%);
   }
 
   .wish-item,
   .wish-item:nth-child(even) {
-    grid-template-columns: 76px minmax(0, 1fr);
     gap: 14px;
-    text-align: left;
+    text-align: center;
   }
 
-  .wish-item:nth-child(even) .wish-item__icon,
-  .wish-item:nth-child(even) div {
-    order: initial;
+  .wish-item__icon {
+    width: clamp(108px, 34vw, 142px);
   }
 
-  .wish-item h3 {
-    font-size: clamp(28px, 10vw, 40px);
+  .wish-song-form {
+    grid-template-columns: 1fr;
   }
 
   .countdown__title {

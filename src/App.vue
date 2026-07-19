@@ -69,7 +69,7 @@ const wishItems = [
   {
     title: 'Цветочек',
     icon: '/assets/wishes/flower.svg',
-    text: 'Мы будем рады, если вместо букета цветов вы подарите нам только один цветочек, с которым мы у вас ассоциируемся. К концу праздника у нас будет особенный букет, собранный с любовью.',
+    text: 'Пожалуйста, не дарите нам цветы, так как мы не успеем насладиться их красотой до отъезда в свадебное путешествие. Если вы хотите сделать нам комплимент, замените букет бутылочкой вина или цветочной подпиской.',
   },
   {
     title: 'Детки',
@@ -376,21 +376,18 @@ async function submitSong() {
       </div>
     </section>
 
-    <section class="details section framed">
+    <section class="details section">
       <h2 class="details__title">Пожелания</h2>
-      <img class="details__flower" src="/assets/wishes/decor-extra.png" alt="" aria-hidden="true" />
       <div class="wish-list">
         <article v-for="item in wishItems" :key="item.title" class="wish-item">
           <img class="wish-item__icon" :src="item.icon" alt="" aria-hidden="true" />
           <div>
-            <h3>{{ item.title }}</h3>
             <p>{{ item.text }}</p>
           </div>
         </article>
         <article class="wish-item wish-item--song">
           <img class="wish-item__icon" src="/assets/wishes/music.svg" alt="" aria-hidden="true" />
           <div>
-            <h3>Плейлист</h3>
             <p>
               Мы будем рады, если вы поделитесь песней, которая точно должна прозвучать на нашем празднике.
             </p>
