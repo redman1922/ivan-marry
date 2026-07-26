@@ -21,13 +21,12 @@ let scrollRafId = 0;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
 const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
-const musicSrc = 'https://dl.dropbox.com/scl/fi/gfcy12x559hdbopns63qq/fkj_-_Ylang_Ylang.mp3?rlkey=osj439un4o3qkp60b6pmvc4ck&st=dtxikddz&dl=0';
-const timingLinePath = 'M44 18 C150 78 270 144 276 250 C282 354 136 386 94 500 C58 598 178 652 238 734 C320 846 116 900 84 1032 C58 1142 174 1200 238 1288 C316 1394 144 1460 92 1588 C46 1704 154 1782 234 1878 C318 1980 220 2090 48 2228';
+const musicSrc = '/assets/audio/lana-del-rey-chemtrails-over-the-country-club.mp3';
+const timingLinePath = 'M28 18 C302 143 332 302 286 470 C232 665 22 683 18 909 C14 1131 306 1151 304 1384 C302 1624 18 1633 18 1868 C18 2069 228 2074 300 2110';
 
 const rsvp = ref({
   attendance: '',
   name: '',
-  guests: '',
   overnight: '',
   drinks: [],
   telegram: '',
@@ -223,7 +222,6 @@ async function submitRsvp() {
     await sendToGoogleSheets('rsvp', {
       attendance: rsvp.value.attendance,
       name: rsvp.value.name,
-      guests: rsvp.value.guests,
       overnight: rsvp.value.overnight,
       drinks: [...rsvp.value.drinks],
       telegram: rsvp.value.telegram,
@@ -282,8 +280,7 @@ async function submitSong() {
 
     <section class="hero section" :class="{ 'is-visible': isOpened }">
       <div class="hero__image">
-        <img class="hero__photo" src="/assets/couple-hero.png" alt="Иван и Анна" />
-        <img class="hero__frame" src="/assets/docx/photo-frame-reference.png" alt="" aria-hidden="true" />
+        <img class="hero__photo" src="/assets/first.png" alt="Иван и Анна" />
       </div>
       <div class="hero__text">
         <h1 class="hero__names">Иван<br />&<br />Анна</h1>
@@ -298,6 +295,7 @@ async function submitSong() {
         <br /><br />
         В этот волшебный день мы скажем друг другу «Да» и соединим наши сердца и судьбы в окружении самых близких и родных людей.
       </p>
+      <h3 class="date-section__calendar-title">Наш сентябрь</h3>
       <img class="date-section__calendar" src="/assets/docx/date-reference.svg" alt="19 сентября 2026" />
     </section>
 
@@ -428,7 +426,7 @@ async function submitSong() {
 
     <section class="rsvp section">
       <h2 class="rsvp__title">Анкета гостя</h2>
-      <p>Пожалуйста, подтвердите своё присутствие до 1 августа.</p>
+      <p>Пожалуйста, подтвердите своё присутствие до 15 августа.</p>
 
       <form class="form" @submit.prevent="submitRsvp">
         <fieldset>
@@ -438,7 +436,6 @@ async function submitSong() {
         </fieldset>
 
         <label>Имя и фамилия<input v-model="rsvp.name" type="text" required /></label>
-        <label>Если вы будете с семьей, внесите имена гостей<input v-model="rsvp.guests" type="text" /></label>
         <label>Ваш Telegram для связи<input v-model="rsvp.telegram" type="text" placeholder="@username" /></label>
 
         <fieldset>
@@ -477,8 +474,7 @@ async function submitSong() {
         <div><strong>{{ countdown.seconds }}</strong><span>секунд</span></div>
       </div>
       <div class="countdown__photo">
-        <img class="countdown__photo-img" src="/assets/couple-hero.png" alt="Иван и Анна" />
-        <img class="countdown__photo-frame" src="/assets/docx/photo-frame-reference.png" alt="" aria-hidden="true" />
+        <img class="countdown__photo-img" src="/assets/end.png" alt="Иван и Анна" />
       </div>
       <p class="signature">
         <span>С любовью,</span>

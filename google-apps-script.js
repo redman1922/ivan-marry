@@ -3,7 +3,7 @@ const SPREADSHEET_ID = '14gsoZMfzrV--zbw_eXEfaogsZOAfEEZsPSXoJggqM7I';
 const SHEETS = {
   rsvp: {
     name: 'RSVP',
-    headers: ['sentAt', 'attendance', 'name', 'guests', 'overnight', 'drinks', 'telegram'],
+    headers: ['sentAt', 'attendance', 'name', 'overnight', 'drinks', 'telegram'],
   },
   song: {
     name: 'Songs',
@@ -28,7 +28,6 @@ function doPost(event) {
       request.sentAt || new Date().toISOString(),
       payload.attendance || '',
       payload.name || '',
-      payload.guests || '',
       payload.overnight || '',
       Array.isArray(payload.drinks) ? payload.drinks.join(', ') : '',
       payload.telegram || '',
