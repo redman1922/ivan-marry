@@ -21,7 +21,8 @@ let scrollRafId = 0;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
 const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
-const musicSrc = '/assets/audio/lana-del-rey-chemtrails-over-the-country-club.mp3';
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+const musicSrc = assetPath('/assets/audio/lana-del-rey-chemtrails-over-the-country-club.mp3');
 const timingLinePath = 'M28 18 C302 143 332 302 286 470 C232 665 22 683 18 909 C14 1131 306 1151 304 1384 C302 1624 18 1633 18 1868 C18 2069 228 2074 300 2110';
 
 const rsvp = ref({
@@ -33,51 +34,51 @@ const rsvp = ref({
 });
 
 const timing = [
-  { time: '16:00', title: 'Сбор гостей', icon: '/assets/timing/guests.svg' },
-  { time: '17:00', title: 'Церемония', icon: '/assets/timing/ceremony.svg' },
-  { time: '18:00', title: 'Банкет', icon: '/assets/timing/banquet.svg' },
-  { time: '22:00', title: 'Торт', icon: '/assets/timing/cake.svg' },
-  { time: '23:00', title: 'Окончание вечера', icon: '/assets/timing/finish.svg' },
+  { time: '16:00', title: 'Сбор гостей', icon: assetPath('/assets/timing/guests.svg') },
+  { time: '17:00', title: 'Церемония', icon: assetPath('/assets/timing/ceremony.svg') },
+  { time: '18:00', title: 'Банкет', icon: assetPath('/assets/timing/banquet.svg') },
+  { time: '22:00', title: 'Торт', icon: assetPath('/assets/timing/cake.svg') },
+  { time: '23:00', title: 'Окончание вечера', icon: assetPath('/assets/timing/finish.svg') },
 ];
 
 const locationSlides = [
   {
-    src: '/assets/location/glass-veranda.png',
+    src: assetPath('/assets/location/glass-veranda.png'),
   },
   {
-    src: '/assets/location/park-territory.png',
+    src: assetPath('/assets/location/park-territory.png'),
   },
 ];
 
 const routeUrl = 'https://yandex.ru/maps/-/CTa-rE9R';
 
 const dressTextures = [
-  { name: 'Бордовый атлас', src: '/assets/dress/satin-burgundy.png' },
-  { name: 'Оливковый атлас', src: '/assets/dress/satin-olive.png' },
-  { name: 'Коричневый атлас', src: '/assets/dress/satin-brown.png' },
-  { name: 'Шампань', src: '/assets/dress/satin-champagne.png' },
-  { name: 'Пудровый атлас', src: '/assets/dress/satin-blush.png' },
+  { name: 'Бордовый атлас', src: assetPath('/assets/dress/satin-burgundy.png') },
+  { name: 'Оливковый атлас', src: assetPath('/assets/dress/satin-olive.png') },
+  { name: 'Коричневый атлас', src: assetPath('/assets/dress/satin-brown.png') },
+  { name: 'Шампань', src: assetPath('/assets/dress/satin-champagne.png') },
+  { name: 'Пудровый атлас', src: assetPath('/assets/dress/satin-blush.png') },
 ];
 
 const wishItems = [
   {
     title: 'Конверты',
-    icon: '/assets/wishes/envelope.svg',
+    icon: assetPath('/assets/wishes/envelope.svg'),
     text: 'Ваши улыбки и смех подарят нам незабываемое счастье в этот день, а пожелания в конвертах помогут осуществить наши мечты!',
   },
   {
     title: 'Цветочек',
-    icon: '/assets/wishes/flower.svg',
+    icon: assetPath('/assets/wishes/flower.svg'),
     text: 'Пожалуйста, не дарите нам цветы, так как мы не успеем насладиться их красотой до отъезда в свадебное путешествие. Если вы хотите сделать нам комплимент, замените букет бутылочкой вина или цветочной подпиской.',
   },
   {
     title: 'Детки',
-    icon: '/assets/wishes/kids.svg',
+    icon: assetPath('/assets/wishes/kids.svg'),
     text: 'Мы от всего сердца хотим, чтобы вы смогли расслабиться и насладиться каждым мгновением нашего праздника. Заранее благодарим за то, что позаботитесь о присмотре за вашими чудесными детками!',
   },
   {
     title: 'Горько',
-    icon: '/assets/wishes/gorko.svg',
+    icon: assetPath('/assets/wishes/gorko.svg'),
     text: 'От всего сердца просим вас воздержаться от криков «Горько!» и сохранить атмосферу уютного семейного праздника.',
   },
 ];
@@ -266,9 +267,9 @@ async function submitSong() {
       <button class="envelope" type="button" @click="openInvitation" aria-label="Открыть приглашение">
         <span class="envelope__shade" />
         <span class="envelope__content">
-          <img class="envelope__wedding" src="/assets/docx/wedding-title-reference.svg" alt="на свадьбу" />
+          <img class="envelope__wedding" :src="assetPath('/assets/docx/wedding-title-reference.svg')" alt="на свадьбу" />
         </span>
-        <img class="seal" src="/assets/docx/seal-reference.png" alt="Нажмите" />
+        <img class="seal" :src="assetPath('/assets/docx/seal-reference.png')" alt="Нажмите" />
       </button>
       <p class="intro-note">
         Вы не просто так получили это приглашение! В особенный день мы очень хотим, чтобы вы были рядом!
@@ -277,7 +278,7 @@ async function submitSong() {
 
     <section class="hero section" :class="{ 'is-visible': isOpened }">
       <div class="hero__image">
-        <img class="hero__photo" src="/assets/first.png" alt="Иван и Анна" />
+        <img class="hero__photo" :src="assetPath('/assets/first.png')" alt="Иван и Анна" />
       </div>
       <div class="hero__text">
         <h1 class="hero__names">Иван<br />&<br />Анна</h1>
@@ -293,7 +294,7 @@ async function submitSong() {
         В этот волшебный день мы скажем друг другу «Да» и соединим наши сердца и судьбы в окружении самых близких и родных людей.
       </p>
       <h3 class="date-section__calendar-title">Наш сентябрь</h3>
-      <img class="date-section__calendar" src="/assets/docx/date-reference.svg" alt="19 сентября 2026" />
+      <img class="date-section__calendar" :src="assetPath('/assets/docx/date-reference.svg')" alt="19 сентября 2026" />
     </section>
 
     <section class="location section">
@@ -332,7 +333,7 @@ async function submitSong() {
     <section class="timing section">
       <h2 class="timing__title">Тайминг дня</h2>
       <div ref="timelineEl" class="timeline">
-        <img class="timeline__line" src="/assets/timing/timing-line.svg" alt="" aria-hidden="true" />
+        <img class="timeline__line" :src="assetPath('/assets/timing/timing-line.svg')" alt="" aria-hidden="true" />
         <svg class="timeline__curve" viewBox="0 0 321 2245" preserveAspectRatio="none" aria-hidden="true">
           <path ref="timelinePath" :d="timingLinePath" />
         </svg>
@@ -381,7 +382,7 @@ async function submitSong() {
           </div>
         </article>
         <article class="wish-item wish-item--song">
-          <img class="wish-item__icon" src="/assets/wishes/music.svg" alt="" aria-hidden="true" />
+          <img class="wish-item__icon" :src="assetPath('/assets/wishes/music.svg')" alt="" aria-hidden="true" />
           <div>
             <p>
               Мы будем рады, если вы поделитесь песней, которая точно должна прозвучать на нашем празднике.
@@ -400,7 +401,7 @@ async function submitSong() {
           </div>
         </article>
         <article class="wish-item wish-item--stay">
-          <img class="wish-item__icon" src="/assets/wishes/house.svg" alt="" aria-hidden="true" />
+          <img class="wish-item__icon" :src="assetPath('/assets/wishes/house.svg')" alt="" aria-hidden="true" />
           <div>
             <p>
               Дорогие гости! Для вашего комфорта мы предусмотрели возможность переночевать в домиках на территории парк-отеля, где будет проходить праздник. Возьмите с собой сменную одежду и купальники, если захотите отдохнуть в бане.
@@ -408,7 +409,7 @@ async function submitSong() {
           </div>
         </article>
         <article class="wish-item wish-item--telegram">
-          <img class="wish-item__icon" src="/assets/wishes/telegram.svg?v=3" alt="" aria-hidden="true" />
+          <img class="wish-item__icon" :src="assetPath('/assets/wishes/telegram.svg?v=3')" alt="" aria-hidden="true" />
           <div>
             <p>
               Мы создали телеграм-чат нашего праздника, где можно будет узнать дополнительную информацию, а также поделиться фотографиями и видео в день свадьбы и после.
@@ -462,7 +463,7 @@ async function submitSong() {
     </section>
 
     <section class="countdown section">
-      <img class="countdown__rings" src="/assets/countdown/rings.svg" alt="" aria-hidden="true" />
+      <img class="countdown__rings" :src="assetPath('/assets/countdown/rings.svg')" alt="" aria-hidden="true" />
       <h2 class="countdown__title">Мы скажем «Да» через</h2>
       <div class="countdown__grid">
         <div><strong>{{ countdown.days }}</strong><span>дней</span></div>
@@ -471,7 +472,7 @@ async function submitSong() {
         <div><strong>{{ countdown.seconds }}</strong><span>секунд</span></div>
       </div>
       <div class="countdown__photo">
-        <img class="countdown__photo-img" src="/assets/end.png" alt="Иван и Анна" />
+        <img class="countdown__photo-img" :src="assetPath('/assets/end.png')" alt="Иван и Анна" />
       </div>
       <p class="signature">
         <span>С любовью,</span>
