@@ -20,7 +20,7 @@ let sliderTimerId;
 let scrollRafId = 0;
 
 const weddingDate = new Date('2026-09-19T16:00:00+03:00');
-const googleSheetsEndpoint = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
+const googleSheetsEndpoint = 'https://script.google.com/macros/s/AKfycbyVodpGbBnLR7RtSHGsK1-txBRGF3-fAqh4oWd2bmXbZm5Zh308Lop8q4WXxEbgtHcx/exec';
 const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const musicSrc = assetPath('/assets/audio/lana-del-rey-chemtrails-over-the-country-club.mp3');
 const timingLinePath = 'M28 18 C302 143 332 302 286 470 C232 665 22 683 18 909 C14 1131 306 1151 304 1384 C302 1624 18 1633 18 1868 C18 2069 228 2074 300 2110';
@@ -178,7 +178,7 @@ watch(
 
 async function sendToGoogleSheets(type, payload) {
   if (!googleSheetsEndpoint) {
-    throw new Error('Не указан VITE_GOOGLE_SCRIPT_URL в .env');
+    throw new Error('Не указан URL Google Apps Script');
   }
 
   await fetch(googleSheetsEndpoint, {
