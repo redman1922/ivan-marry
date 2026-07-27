@@ -168,7 +168,7 @@ input {
 .seal {
   position: absolute;
   left: 50%;
-  top: min(78vh, 78%);
+  top: clamp(270px, 39vh, 370px);
   display: block;
   width: clamp(168px, 16vw, 226px);
   aspect-ratio: 1;
@@ -183,8 +183,8 @@ input {
   position: absolute;
   left: 0;
   right: 0;
-  top: clamp(270px, 39vh, 370px);
-  width: min(560px, calc(100vw - 36px));
+  top: min(78vh, 78%);
+  width: min(416px, calc(100vw - 36px));
   margin: 0 auto;
   text-align: center;
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -202,12 +202,12 @@ input {
 
 @media (min-width: 821px) {
   .intro-note {
-    top: clamp(365px, 45vh, 420px);
-    font-size: clamp(26px, 2.6vw, 34px);
+    top: min(80vh, 80%);
+    font-size: clamp(20px, calc(2.6vw - 6px), 28px);
   }
 
   .seal {
-    top: min(82vh, 82%);
+    top: clamp(540px, 63vh, 610px);
   }
 }
 
@@ -218,7 +218,11 @@ input {
   }
 
   .intro-note {
-    top: clamp(330px, 44vh, 390px);
+    top: min(80vh, 80%);
+  }
+
+  .seal {
+    top: clamp(520px, 63vh, 590px);
   }
 }
 
@@ -588,7 +592,7 @@ p {
 
 .timeline__curve path {
   fill: none;
-  stroke: #e0c58e;
+  stroke: var(--burgundy);
   stroke-width: 3.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -601,7 +605,7 @@ p {
   top: 0;
   left: 0;
   display: block;
-  font-size: clamp(34px, 4.8vw, 52px);
+  font-size: clamp(54px, 7vw, 80px);
   line-height: 1;
   color: var(--burgundy);
   filter: drop-shadow(0 8px 12px rgba(72, 16, 26, .18));
@@ -1070,10 +1074,10 @@ input[type="checkbox"] {
   }
 
   .intro-note {
-    top: clamp(300px, 43vh, 395px);
+    top: min(78vh, 78%);
     width: min(380px, calc(100vw - 28px));
     max-width: calc(100vw - 28px);
-    font-size: clamp(20px, 5.8vw, 24px);
+    font-size: 20px;
     line-height: 1.24;
   }
 
@@ -1088,8 +1092,9 @@ input[type="checkbox"] {
   }
 
   .seal {
-    width: clamp(126px, 39vw, 168px);
-    top: min(78vh, 78%);
+    width: clamp(156px, 21svh, 190px);
+    max-width: calc(100vw - 96px);
+    top: clamp(400px, 62vh, 540px);
   }
 
   .timing {
@@ -1140,7 +1145,7 @@ input[type="checkbox"] {
   }
 
   .timeline__heart {
-    font-size: 38px;
+    font-size: 60px;
   }
 
   .location {
@@ -1278,7 +1283,7 @@ input[type="checkbox"] {
   }
 
   .timeline__heart {
-    font-size: 34px;
+    font-size: 54px;
   }
 
   .envelope__wedding {
@@ -1299,13 +1304,14 @@ input[type="checkbox"] {
   }
 
   .intro-note {
-    top: 258px;
-    font-size: 19px;
+    top: min(76vh, 76%);
+    font-size: 20px;
     line-height: 1.2;
   }
 
   .seal {
-    top: 80vh;
-    width: clamp(116px, 26vh, 150px);
+    top: clamp(350px, 62vh, 420px);
+    width: clamp(140px, 22svh, 166px);
+    max-width: calc(100vw - 96px);
   }
 }

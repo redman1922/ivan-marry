@@ -271,10 +271,7 @@ async function submitSong() {
         <img class="seal" src="/assets/docx/seal-reference.png" alt="Нажмите" />
       </button>
       <p class="intro-note">
-        <span>Вы не просто так получили</span>
-        <span>это приглашение.</span>
-        <span>В особенный день мы очень хотим,</span>
-        <span>чтобы вы были рядом.</span>
+        Вы не просто так получили это приглашение! В особенный день мы очень хотим, чтобы вы были рядом!
       </p>
     </section>
 
