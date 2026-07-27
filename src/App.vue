@@ -1,8 +1,6 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
-//da
-
 const isOpened = ref(false);
 const submitted = ref(false);
 const now = ref(new Date());
